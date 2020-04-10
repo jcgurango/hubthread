@@ -69,13 +69,13 @@ Welcome to the r/Philippines hub thread! Where are you trying to go?
     `);
 
     console.log('Retrieving current thread content...');
-    const currentSubmission = await reddit.getSubmission('fycd68').fetch();
+    const currentSubmission = await reddit.getSubmission(process.env.HUB_THREAD_ID).fetch();
 
     if (currentSubmission.selftext.trim() !== threadContent.trim()) {
         console.log('Updating thread content to:');
         console.log(threadContent);
 
-        await reddit.getSubmission('fycd68').edit(threadContent);
+        await reddit.getSubmission(process.env.HUB_THREAD_ID).edit(threadContent);
 
         console.log('Updated. Old content:');
         console.log(currentSubmission.selftext);

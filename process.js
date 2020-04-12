@@ -11,7 +11,7 @@ const latestThreadSearch = async (reddit, author, title) => {
 
     // Find the first result with a matching author.
     const results = await reddit.search({
-        subreddit: 'Philippines',
+        subreddit: process.env.SUBREDDIT,
         restrictSr: true,
         sort: 'new',
         query: title,
@@ -60,12 +60,17 @@ module.exports = async (reddit) => {
         throw new Error('What to do in not found!');
     }
 
+    console.log('Retrieving wiki content...');
+    const wikiPage = await reddit.getSubreddit(process.env.SUBREDDIT).getWikiPage(process.env.WIKI_PAGE).content_md;
+    const [, appendedContent] = wikiPage.split('-----\n', 2);
+
     const threadContent = (`
 Welcome to the r/Philippines hub thread! Where are you trying to go?
 
 - [${rd.title}](https://redd.it/${rd.id})
 - [${help.title}](https://redd.it/${help.id})
 - [${whatToDo.title}](https://redd.it/${whatToDo.id})
+${appendedContent}
     `);
 
     console.log('Retrieving current thread content...');

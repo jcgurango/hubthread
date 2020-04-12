@@ -22,7 +22,7 @@ const latestThreadSearch = async (reddit, author, title) => {
         // Check if this is what we're looking for.
         const result = results[i];
 
-        if (result.author.name === author) {
+        if (result.author.name === author && result.title.indexOf('[HUB]') !== 0) {
             return result;
         }
 

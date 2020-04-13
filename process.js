@@ -1,4 +1,6 @@
 const Reddit = require('snoowrap');
+const dayjs = require('dayjs');
+dayjs.extend(require('dayjs/plugin/utc'));
 
 /**
  * @param {Reddit} reddit 
@@ -53,8 +55,9 @@ module.exports = async (reddit) => {
         throw new Error('Help thread not found!');
     }
 
-    console.log('Retrieving latest "What to Do" thread...');
-    const whatToDo = await latestThreadSearch(reddit, 'the_yaya', '"what to do in"');
+    console.log('Retrieving current month "What to Do" thread...');
+    const whatToDo = await latestThreadSearch(reddit, 'the_yaya', `"what to do in ${dayjs.utc().add(8, 'hour').format('MMMM YYYY')}"`)
+        || await latestThreadSearch(reddit, 'the_yaya', '"what to do in"');
 
     if (!whatToDo) {
         throw new Error('What to do in not found!');

@@ -27,3 +27,5 @@ const tick = async () => {
 };
 
 tick();
+
+require('./server.js').listen(process.env.PORT || 3000);

@@ -1,5 +1,6 @@
 const Reddit = require('snoowrap');
 const dayjs = require('dayjs');
+const threadIds = require('./thread-ids');
 dayjs.extend(require('dayjs/plugin/utc'));
 
 /**
@@ -48,12 +49,16 @@ module.exports = async (reddit) => {
         throw new Error('RD not found!');
     }
 
+    threadIds.rd = rd.id;
+
     console.log('Retrieving latest help thread...');
     const help = await latestThreadSearch(reddit, 'AutoModerator', 'weekly help thread');
 
     if (!help) {
         throw new Error('Help thread not found!');
     }
+
+    threadIds.help = help.id;
 
     console.log('Retrieving current month "What to Do" thread...');
     const whatToDo = await latestThreadSearch(reddit, 'the_yaya', `"what to do in ${dayjs.utc().add(8, 'hour').format('MMMM YYYY')}"`)
@@ -62,6 +67,8 @@ module.exports = async (reddit) => {
     if (!whatToDo) {
         throw new Error('What to do in not found!');
     }
+
+    threadIds.whatToDo = whatToDo.id;
 
     console.log('Retrieving wiki content...');
     const wikiPage = await reddit.getSubreddit(process.env.SUBREDDIT).getWikiPage(process.env.WIKI_PAGE).content_md;

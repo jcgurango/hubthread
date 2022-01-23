@@ -52,7 +52,7 @@ module.exports = async (reddit) => {
     threadIds.rd = rd.id;
 
     console.log('Retrieving latest help thread...');
-    const help = await latestThreadSearch(reddit, 'AutoModerator', 'weekly help thread');
+    const help = await latestThreadSearch(reddit, 'AutoModerator', '"weekly help thread"');
 
     if (!help) {
         throw new Error('Help thread not found!');

@@ -77,9 +77,9 @@ module.exports = async (reddit) => {
     const threadContent = (`
 Welcome to the r/Philippines hub thread! Where are you trying to go?
 
-- [${rd.title}](https://redd.it/${rd.id})
-- [${help.title}](https://redd.it/${help.id})
-- [${whatToDo.title}](https://redd.it/${whatToDo.id})
+- [${rd.title}](https://www.reddit.com/comments/${rd.id})
+- [${help.title}](https://www.reddit.com/comments/${help.id})
+- [${whatToDo.title}](https://www.reddit.com/comments/${whatToDo.id})
 ${appendedContent}
     `);
 

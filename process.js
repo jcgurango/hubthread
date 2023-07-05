@@ -80,7 +80,7 @@ Welcome to the r/Philippines hub thread! Where are you trying to go?
 ## [${rd.title}](https://www.reddit.com/r/Philippines/comments/${rd.id})
 ## [${help.title}](https://www.reddit.com/r/Philippines/comments/${help.id})
 ## [${whatToDo.title}](https://www.reddit.com/r/Philippines/comments/${whatToDo.id})
-${appendedContent}
+${appendedContent || ''}
     `);
 
     console.log('Retrieving current thread content...');

@@ -61,7 +61,8 @@ module.exports = async (reddit) => {
     threadIds.help = help.id;
 
     console.log('Retrieving current month "What to Do" thread...');
-    const whatToDo = await latestThreadSearch(reddit, 'the_yaya', '"what to do in"');
+    const whatToDo = await latestThreadSearch(reddit, 'the_yaya', `"what to do in ${dayjs.utc().add(8, 'hour').format('MMMM YYYY')}"`)
+        || await latestThreadSearch(reddit, 'the_yaya', '"what to do in"');
 
     if (!whatToDo) {
         throw new Error('What to do in not found!');
